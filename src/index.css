@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-gray-900;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.sliding-text {
+  animation: slide 20s linear infinite;
+  white-space: nowrap;
+}
+
+.experience-badge {
+  @apply relative inline-flex items-center justify-center;
+}
+
+.experience-badge::before {
+  content: '';
+  @apply absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-75 blur;
+}
+
+/* Market Ticker Animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+  display: flex;
+  width: max-content;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Hero Section Animations */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 4s ease-in-out infinite;
+}
+
+/* Testimonials Scrolling Animation */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.testimonials-container {
+  position: relative;
+  overflow: hidden;
+  padding: 0 100px;
+  z-index: 0;
+}
+
+.animate-scroll-left {
+  animation: scroll-left 40s linear infinite;
+  display: flex;
+  width: max-content;
+  gap: 1.5rem;
+}
+
+.animate-scroll-right {
+  animation: scroll-right 40s linear infinite;
+  display: flex;
+  width: max-content;
+  gap: 1.5rem;
+}
+
+/* Pause animation on hover */
+.animate-scroll-left:hover,
+.animate-scroll-right:hover {
+  animation-play-state: paused;
+}
+
+/* Ensure smooth scrolling */
+.animate-scroll-left,
+.animate-scroll-right {
+  will-change: transform;
+}
+
+/* Gradient fade effect */
+.testimonials-container::before,
+.testimonials-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 200px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.testimonials-container::before {
+  left: 0;
+  background: linear-gradient(to right, rgb(17, 24, 39) 0%, rgb(17, 24, 39) 50%, transparent 100%);
+}
+
+.testimonials-container::after {
+  right: 0;
+  background: linear-gradient(to left, rgb(17, 24, 39) 0%, rgb(17, 24, 39) 50%, transparent 100%);
+}
+
+/* Card hover effect */
+.testimonials-container .flex-shrink-0 {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonials-container .flex-shrink-0:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 15s ease infinite;
+}
