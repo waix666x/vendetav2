@@ -1,57 +1,37 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 // Import framework logos
-import reactLogo from '../assets/react.svg';
-import viteLogo from '../assets/vite.svg';
-import typescriptLogo from '../assets/typescript.svg';
-import tailwindLogo from '../assets/tailwind.svg';
-import nodeLogo from '../assets/node.svg';
-import nextLogo from '../assets/next.svg';
+import reactLogo from '../assets/logo/Bitcoin.svg.png';
+import viteLogo from '../assets/logo/eth-logo.png';
+import typescriptLogo from '../assets/logo/firebase-logo.png';
+import tailwindLogo from '../assets/logo/Vitejs-logo.svg.png';
+import nodeLogo from '../assets/logo/js-logo.png';
+import nextLogo from '../assets/logo/Typescript_logo_2020.svg.png';
 
 const frameworks = [
-  { name: 'React', logo: reactLogo },
-  { name: 'Vite', logo: viteLogo },
-  { name: 'TypeScript', logo: typescriptLogo },
-  { name: 'Tailwind', logo: tailwindLogo },
-  { name: 'Node.js', logo: nodeLogo },
-  { name: 'Next.js', logo: nextLogo },
+  { name: 'Bitcoin', logo: reactLogo, color: '#F7931A' },
+  { name: 'Ethereum', logo: viteLogo, color: '#627EEA' },
+  { name: 'Firebase', logo: typescriptLogo, color: '#FFCA28' },
+  { name: 'Vite', logo: tailwindLogo, color: '#646CFF' },
+  { name: 'JavaScript', logo: nodeLogo, color: '#F7DF1E' },
+  { name: 'TypeScript', logo: nextLogo, color: '#3178C6' },
 ];
 
 const FrameworksSection = () => {
-  const rowRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('opacity-100');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const cards = document.querySelectorAll('.framework-card');
-    cards.forEach((card) => observer.observe(card));
-
-    return () => {
-      cards.forEach((card) => observer.unobserve(card));
-    };
-  }, []);
-
   return (
     <div className="frameworks-section py-12">
-      <div className="framework-row" ref={rowRef}>
-        {frameworks.map((framework, index) => (
+      <div className="framework-row">
+        {frameworks.map((framework) => (
           <motion.div
             key={framework.name}
             className="framework-card"
-            initial={{ opacity: 0 }}
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
-            style={{ '--glow-color': '#ff5c13' } as React.CSSProperties}
+            style={{ 
+              '--card-color': framework.color,
+              borderColor: framework.color
+            } as React.CSSProperties}
           >
             <img
               src={framework.logo}
