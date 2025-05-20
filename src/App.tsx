@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BarChart3, Shield, Globe2, TrendingUp, ArrowRight, Phone, Mail, MapPin, Check, Bitcoin, Wallet, DollarSign, Award, Facebook, Twitter, Instagram, Linkedin as LinkedIn, ArrowUp, ArrowDown, Star, ThumbsUp, Heart, Sparkles, Trophy, Target, Zap } from 'lucide-react';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { BarChart3, Shield, Globe2, TrendingUp, ArrowRight, Phone, Mail, MapPin, Check, Bitcoin, Wallet, DollarSign, Award, Facebook, Twitter, Instagram, Linkedin as LinkedIn, ArrowUp, ArrowDown, Star, ThumbsUp, Heart, Sparkles, Trophy, Target, Zap, Globe } from 'lucide-react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import './phone-input.css';
@@ -21,6 +22,7 @@ interface FormData {
 }
 
 function App() {
+  const { scrollYProgress } = useScroll();
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
@@ -30,6 +32,8 @@ function App() {
     honeypot: ''
   });
   const [phoneError, setPhoneError] = useState('');
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const [currentLanguage, setCurrentLanguage] = useState('DE');
 
   useEffect(() => {
     // Load TradingView widget script
@@ -104,6 +108,22 @@ function App() {
     setPhoneError('');
   };
 
+  const scrollToForm = () => {
+    const formElement = document.getElementById('contact-form');
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const toggleLanguageMenu = () => {
+    setIsLanguageMenuOpen(!isLanguageMenuOpen);
+  };
+
+  const changeLanguage = (lang: string) => {
+    setCurrentLanguage(lang);
+    setIsLanguageMenuOpen(false);
+  };
+
   const renderMarketsSection = () => (
     <div id="markets" className="py-24 bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -169,9 +189,39 @@ function App() {
               <a href="#services" className="text-gray-300 hover:text-blue-400 transition-colors">Dienstleistungen</a>
               <a href="#about" className="text-gray-300 hover:text-blue-400 transition-colors">Über uns</a>
               <a href="#markets" className="text-gray-300 hover:text-blue-400 transition-colors">Märkte</a>
-              <button className="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transform hover:scale-105 transition-all shadow-lg hover:shadow-blue-500/25">
-                Loslegen
-              </button>
+              
+              {/* Language Switcher */}
+              <div className="relative">
+                <button
+                  onClick={toggleLanguageMenu}
+                  className="flex items-center space-x-2 text-gray-300 hover:text-blue-400 transition-colors"
+                >
+                  <Globe className="h-5 w-5" />
+                  <span>{currentLanguage}</span>
+                </button>
+                
+                {/* Language Dropdown */}
+                {isLanguageMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-32 bg-gray-800 rounded-lg shadow-lg border border-gray-700 py-1">
+                    <button
+                      onClick={() => changeLanguage('DE')}
+                      className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-700 ${
+                        currentLanguage === 'DE' ? 'text-blue-400' : 'text-gray-300'
+                      }`}
+                    >
+                      Deutsch
+                    </button>
+                    <button
+                      onClick={() => changeLanguage('EN')}
+                      className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-700 ${
+                        currentLanguage === 'EN' ? 'text-blue-400' : 'text-gray-300'
+                      }`}
+                    >
+                      English
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -197,124 +247,132 @@ function App() {
               <p className="mt-3 text-xl text-gray-300 sm:text-2xl md:mt-5">
                 Strategische Investitionslösungen, maßgeschneidert auf Ihre finanziellen Ziele. Lassen Sie uns gemeinsam eine sichere und erfolgreiche Zukunft aufbauen.
               </p>
+              <button
+                onClick={scrollToForm}
+                className="mt-8 bg-blue-500 text-white px-8 py-3 rounded-full hover:bg-blue-600 shadow-lg hover:shadow-blue-500/25 flex items-center space-x-2"
+              >
+                <span>Jetzt Starten</span>
+                <ArrowRight className="w-5 h-5" />
+              </button>
             </div>
 
             {/* Right Column - Form */}
-            <div className="w-full max-w-md mx-auto lg:mx-0">
-              <div className="bg-gray-800/80 backdrop-blur-xl p-8 rounded-2xl shadow-[0_20px_50px_rgba(59,_130,_246,_0.3)] border border-gray-700">
-                {!formSubmitted ? (
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-2 gap-6">
-                      <div className="col-span-1">
-                        <label htmlFor="firstName" className="block text-sm font-semibold text-gray-300 text-left">
-                          Vorname
-                        </label>
-                        <input
-                          type="text"
-                          name="firstName"
-                          id="firstName"
-                          required
-                          className="mt-1 block w-full px-4 py-3 rounded-xl bg-gray-700 border-gray-600 text-gray-100 placeholder-gray-400 shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
-                          value={formData.firstName}
-                          onChange={handleChange}
-                        />
-                      </div>
-                      <div className="col-span-1">
-                        <label htmlFor="lastName" className="block text-sm font-semibold text-gray-300 text-left">
-                          Nachname
-                        </label>
-                        <input
-                          type="text"
-                          name="lastName"
-                          id="lastName"
-                          required
-                          className="mt-1 block w-full px-4 py-3 rounded-xl bg-gray-700 border-gray-600 text-gray-100 placeholder-gray-400 shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
-                          value={formData.lastName}
-                          onChange={handleChange}
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-semibold text-gray-300 text-left mb-2">
-                        Telefonnummer
-                      </label>
-                      <div className="phone-input-container">
-                        <PhoneInput
-                          country={'de'}
-                          value={formData.phone}
-                          onChange={handlePhoneChange}
-                          inputClass="w-full"
-                          buttonClass="!bg-gray-700 !border-gray-600"
-                          dropdownClass="!bg-gray-800 !border-gray-700"
-                          searchClass="!bg-gray-700 !border-gray-600 !text-gray-100"
-                          containerClass="!w-full"
-                          buttonStyle={{
-                            backgroundColor: 'rgb(55, 65, 81)',
-                            border: 'none',
-                            borderRadius: '0.75rem 0 0 0.75rem',
-                            width: '60px'
-                          }}
-                          inputStyle={{
-                            width: '84%',
-                            height: '48px',
-                            backgroundColor: 'rgb(55, 65, 81)',
-                            border: 'none',
-                            borderRadius: '0 0.75rem 0.75rem 0',
-                            color: 'rgb(243, 244, 246)',
-                            marginLeft: '60px'
-                          }}
-                          inputProps={{
-                            name: 'phone',
-                            required: true,
-                            className: 'w-full'
-                          }}
-                          specialLabel=""
-                          enableSearch={true}
-                          searchPlaceholder="Land suchen..."
-                          searchNotFound="Keine Länder gefunden"
-                          preferredCountries={['de', 'at', 'ch']}
-                        />
-                      </div>
-                      {phoneError && (
-                        <p className="mt-1 text-sm text-red-400">{phoneError}</p>
-                      )}
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-semibold text-gray-300 text-left">
-                        E-Mail
+            <div
+              id="contact-form"
+              className="bg-gray-800/50 backdrop-blur-md p-8 rounded-2xl border border-gray-700"
+            >
+              {!formSubmitted ? (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="col-span-1">
+                      <label htmlFor="firstName" className="block text-sm font-semibold text-gray-300 text-left">
+                        Vorname
                       </label>
                       <input
-                        type="email"
-                        name="email"
-                        id="email"
+                        type="text"
+                        name="firstName"
+                        id="firstName"
                         required
                         className="mt-1 block w-full px-4 py-3 rounded-xl bg-gray-700 border-gray-600 text-gray-100 placeholder-gray-400 shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
-                        value={formData.email}
+                        value={formData.firstName}
                         onChange={handleChange}
                       />
                     </div>
-                    <button
-                      type="submit"
-                      className="w-full flex items-center justify-center px-8 py-4 border border-transparent text-lg font-semibold rounded-xl text-white bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
-                    >
-                      Jetzt Investieren
-                      <ArrowRight className="ml-2 h-6 w-6 animate-pulse" />
-                    </button>
-                  </form>
-                ) : (
-                  <div className="text-center py-8 animate-fade-in">
-                    <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-gradient-to-r from-green-400 to-blue-400 p-3">
-                      <Check className="h-10 w-10 text-gray-900" />
+                    <div className="col-span-1">
+                      <label htmlFor="lastName" className="block text-sm font-semibold text-gray-300 text-left">
+                        Nachname
+                      </label>
+                      <input
+                        type="text"
+                        name="lastName"
+                        id="lastName"
+                        required
+                        className="mt-1 block w-full px-4 py-3 rounded-xl bg-gray-700 border-gray-600 text-gray-100 placeholder-gray-400 shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                      />
                     </div>
-                    <h3 className="mt-6 text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                      Anfrage Erfolgreich Gesendet!
-                    </h3>
-                    <p className="mt-4 text-lg text-gray-300">
-                      Vielen Dank für Ihr Interesse. Einer unserer Anlageberater wird Sie in Kürze kontaktieren, um Ihre Anlageziele zu besprechen.
-                    </p>
                   </div>
-                )}
-              </div>
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-semibold text-gray-300 text-left mb-2">
+                      Telefonnummer
+                    </label>
+                    <div className="phone-input-container">
+                      <PhoneInput
+                        country={'de'}
+                        value={formData.phone}
+                        onChange={handlePhoneChange}
+                        inputClass="w-full"
+                        buttonClass="!bg-gray-700 !border-gray-600"
+                        dropdownClass="!bg-gray-800 !border-gray-700"
+                        searchClass="!bg-gray-700 !border-gray-600 !text-gray-100"
+                        containerClass="!w-full"
+                        buttonStyle={{
+                          backgroundColor: 'rgb(55, 65, 81)',
+                          border: 'none',
+                          borderRadius: '0.75rem 0 0 0.75rem',
+                          width: '60px'
+                        }}
+                        inputStyle={{
+                          width: '84%',
+                          height: '48px',
+                          backgroundColor: 'rgb(55, 65, 81)',
+                          border: 'none',
+                          borderRadius: '0 0.75rem 0.75rem 0',
+                          color: 'rgb(243, 244, 246)',
+                          marginLeft: '60px'
+                        }}
+                        inputProps={{
+                          name: 'phone',
+                          required: true,
+                          className: 'w-full'
+                        }}
+                        specialLabel=""
+                        enableSearch={true}
+                        searchPlaceholder="Land suchen..."
+                        searchNotFound="Keine Länder gefunden"
+                        preferredCountries={['de', 'at', 'ch']}
+                      />
+                    </div>
+                    {phoneError && (
+                      <p className="mt-1 text-sm text-red-400">{phoneError}</p>
+                    )}
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-semibold text-gray-300 text-left">
+                      E-Mail
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      required
+                      className="mt-1 block w-full px-4 py-3 rounded-xl bg-gray-700 border-gray-600 text-gray-100 placeholder-gray-400 shadow-sm focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
+                      value={formData.email}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full flex items-center justify-center px-8 py-4 border border-transparent text-lg font-semibold rounded-xl text-white bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
+                  >
+                    Jetzt Investieren
+                    <ArrowRight className="ml-2 h-6 w-6 animate-pulse" />
+                  </button>
+                </form>
+              ) : (
+                <div className="text-center py-8 animate-fade-in">
+                  <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-gradient-to-r from-green-400 to-blue-400 p-3">
+                    <Check className="h-10 w-10 text-gray-900" />
+                  </div>
+                  <h3 className="mt-6 text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                    Anfrage Erfolgreich Gesendet!
+                  </h3>
+                  <p className="mt-4 text-lg text-gray-300">
+                    Vielen Dank für Ihr Interesse. Einer unserer Anlageberater wird Sie in Kürze kontaktieren, um Ihre Anlageziele zu besprechen.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
