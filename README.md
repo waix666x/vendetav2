@@ -1,15 +1,16 @@
 # Capital Ventures Trading Platform
 
-A modern React + TypeScript trading platform with real-time market data visualization and user-friendly interface.
+A professional trading platform built with React, TypeScript, and Vite, featuring real-time market data, interactive charts, and a modern user interface.
 
 ## Features
 
-- Real-time market data display
-- TradingView widget integration
-- Responsive design
-- Modern UI with animations
-- User registration system
-- Multi-language support (German)
+- 📊 Real-time market data integration with TradingView
+- 💱 Support for multiple trading pairs (Crypto, Forex, Commodities)
+- 📱 Responsive design for all devices
+- 🌐 Multi-language support
+- 🔒 Secure form handling with validation
+- 🎨 Modern UI with Tailwind CSS
+- ⚡ Fast performance with Vite
 
 ## Tech Stack
 
@@ -17,15 +18,15 @@ A modern React + TypeScript trading platform with real-time market data visualiz
 - TypeScript
 - Vite
 - Tailwind CSS
-- TradingView Widget
+- Framer Motion
+- TradingView Widgets
 - React Phone Input
 
-## Development
+## Getting Started
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/project.git
-cd project
+git clone https://github.com/waix666x/vendetav2.git
 ```
 
 2. Install dependencies:
@@ -33,7 +34,7 @@ cd project
 npm install
 ```
 
-3. Start development server:
+3. Start the development server:
 ```bash
 npm run dev
 ```
@@ -43,74 +44,21 @@ npm run dev
 npm run build
 ```
 
-## Deployment
-
-### GitHub Setup
-
-1. Initialize git (if not already done):
-```bash
-git init
-```
-
-2. Add your files:
-```bash
-git add .
-```
-
-3. Commit your changes:
-```bash
-git commit -m "Initial commit"
-```
-
-4. Add your GitHub repository as remote:
-```bash
-git remote add origin https://github.com/yourusername/project.git
-```
-
-5. Push to GitHub:
-```bash
-git push -u origin main
-```
-
-### Netlify Deployment
-
-1. Go to [Netlify](https://www.netlify.com/) and sign in with your GitHub account
-2. Click "Add new site" > "Import an existing project"
-3. Select your GitHub repository
-4. Configure the build settings:
-   - Build command: `npm run build`
-   - Publish directory: `dist`
-5. Click "Deploy site"
-
 ## Environment Variables
 
-Create a `.env` file in the root directory with the following variables (if needed):
-```
-VITE_API_KEY=your_api_key
-```
+Create a `.env` file in the root directory with the following variables:
 
-## Project Structure
-
+```env
+VITE_APP_TITLE=Capital Ventures
+VITE_APP_DESCRIPTION=Trading Platform
+VITE_ENABLE_ANALYTICS=false
+VITE_ENABLE_DEBUG=false
 ```
-project/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── App.tsx
-│   └── main.tsx
-├── public/
-├── index.html
-└── vite.config.ts
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
