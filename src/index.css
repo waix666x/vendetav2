@@ -177,3 +177,72 @@
   background-size: 200% 200%;
   animation: gradient-x 15s ease infinite;
 }
+
+.frameworks-section {
+  width: 100%;
+  overflow: hidden;
+}
+
+.framework-row {
+  display: grid;
+  grid-auto-columns: 96px;
+  grid-gap: 24px;
+  justify-content: flex-start;
+  margin-bottom: 24px;
+  position: relative;
+  white-space: nowrap;
+  grid-auto-flow: column;
+  overflow-x: auto;
+  padding: 0 24px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.framework-row::-webkit-scrollbar {
+  display: none;
+}
+
+.framework-card {
+  width: 96px;
+  height: 96px;
+  border-radius: 12px;
+  border: 1px solid rgba(38, 38, 38, 0.7);
+  background: #181818;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  --glow-color: rgba(0, 0, 0, 0);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  user-select: none;
+  position: relative;
+}
+
+.framework-card:has(img)::before {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  bottom: 10%;
+  background-color: var(--glow-color);
+  filter: blur(18px);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 3s ease;
+  will-change: opacity;
+}
+
+.framework-card:hover::before {
+  opacity: 0.5;
+}
+
+.framework-card img {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.framework-card:hover img {
+  filter: grayscale(0%);
+}

@@ -3,6 +3,7 @@ import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { BarChart3, Shield, Globe2, TrendingUp, ArrowRight, Phone, Mail, MapPin, Check, Bitcoin, Wallet, DollarSign, Award, Facebook, Twitter, Instagram, Linkedin as LinkedIn, ArrowUp, ArrowDown, Star, ThumbsUp, Heart, Sparkles, Trophy, Target, Zap, Globe } from 'lucide-react';
 import PhoneInput from 'react-phone-input-2';
 import { Helmet } from 'react-helmet-async';
+import FrameworksSection from './components/FrameworksSection';
 import 'react-phone-input-2/lib/style.css';
 import './phone-input.css';
 import tradingAnimation from './assets/JtBZm3Getg3dqxK0zP.webp';
@@ -400,6 +401,9 @@ function App() {
             Investieren Sie heute in Ihre Zukunft - Wachsen Sie mit uns über Ihre Grenzen hinaus
           </div>
         </div>
+
+        {/* Frameworks Section */}
+        <FrameworksSection />
       </div>
 
       {/* Services Section */}
