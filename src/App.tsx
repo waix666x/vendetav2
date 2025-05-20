@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { BarChart3, Shield, Globe2, TrendingUp, ArrowRight, Phone, Mail, MapPin, Check, Bitcoin, Wallet, DollarSign, Award, Facebook, Twitter, Instagram, Linkedin as LinkedIn, ArrowUp, ArrowDown, Star, ThumbsUp, Heart, Sparkles, Trophy, Target, Zap, Globe } from 'lucide-react';
 import PhoneInput from 'react-phone-input-2';
+import { Helmet } from 'react-helmet-async';
 import 'react-phone-input-2/lib/style.css';
 import './phone-input.css';
 import tradingAnimation from './assets/JtBZm3Getg3dqxK0zP.webp';
@@ -177,6 +178,22 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
+      <Helmet>
+        <title>Capital Ventures - Trading Platform</title>
+        <meta name="description" content="Trade securely with Capital Ventures. Real-time insights and top-notch tools for cryptocurrency and traditional markets." />
+        <meta name="keywords" content="trading, cryptocurrency, bitcoin, ethereum, gold, forex, investment" />
+        <meta property="og:title" content="Capital Ventures - Trading Platform" />
+        <meta property="og:description" content="Trade securely with Capital Ventures. Real-time insights and top-notch tools for cryptocurrency and traditional markets." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://capital-ventures.com" />
+        <meta property="og:image" content="/cover.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Capital Ventures - Trading Platform" />
+        <meta name="twitter:description" content="Trade securely with Capital Ventures. Real-time insights and top-notch tools for cryptocurrency and traditional markets." />
+        <meta name="twitter:image" content="/cover.jpg" />
+        <link rel="canonical" href="https://capital-ventures.com" />
+      </Helmet>
+      
       {/* Navigation */}
       <nav className="bg-gray-900/80 backdrop-blur-md shadow-lg border-b border-gray-800 fixed w-full z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
