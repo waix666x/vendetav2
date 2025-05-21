@@ -4,19 +4,10 @@
 
 [build.environment]
   NODE_VERSION = "18.17.0"
-  NPM_FLAGS = "--legacy-peer-deps"
-  NODE_ENV = "production"
   VITE_APP_TITLE = "Capital Ventures"
   VITE_APP_DESCRIPTION = "Trading Platform"
   VITE_ENABLE_ANALYTICS = "false"
   VITE_ENABLE_DEBUG = "false"
-
-[dev]
-  command = "npm run dev"
-  port = 3000
-  targetPort = 3000
-  publish = "dist"
-  autoLaunch = true
 
 [[redirects]]
   from = "/*"
@@ -29,4 +20,5 @@
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin" 
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';"

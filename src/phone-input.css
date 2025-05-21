@@ -5,7 +5,7 @@
 
 .react-tel-input .form-control {
   @apply bg-gray-700 text-gray-100;
-  width: 84% !important;
+  width: 88.5% !important;
   height: 48px !important;
   border-radius: 0.75rem !important;
   font-size: 1rem !important;

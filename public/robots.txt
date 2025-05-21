@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://capital-ventures.com/sitemap.xml 
